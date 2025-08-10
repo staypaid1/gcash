@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GCash Demo Wallet</title>
+    <link rel="icon" href="assets/gcash-icon.png" type="image/png">
+    <style>
+        /* (Keep all CSS from previous implementation) */
+        /* Full CSS included in previous response */
+    </style>
+</head>
+<body>
+    <!-- (Keep all HTML from previous implementation) -->
+    <!-- Full HTML structure included in previous response -->
+
+    <script>
+        // Enhanced with localStorage persistence
+        function initApp() {
+            // Load mock database or initialize
+            if (!localStorage.getItem('mockDB')) {
+                const mockDB = {
+                    users: [
+                        {
+                            id: "demo1",
+                            name: "Juan Dela Cruz",
+                            phone: "09171234567",
+                            pin: "1234",
+                            balance: 900000,
+                            transactions: [
+                                { id: "tx1", type: "credit", amount: 900000, description: "Welcome Bonus", date: new Date().toISOString().split('T')[0] }
+                            ]
+                        },
+                        {
+                            id: "demo2",
+                            name: "Maria Clara",
+                            phone: "09998887766",
+                            pin: "5678",
+                            balance: 900000,
+                            transactions: [
+                                { id: "tx1", type: "credit", amount: 900000, description: "Welcome Bonus", date: new Date().toISOString().split('T')[0] }
+                            ]
+                        }
+                    ]
+                };
+                localStorage.setItem('mockDB', JSON.stringify(mockDB));
+            }
+            
+            // Load current session if exists
+            if (localStorage.getItem('currentUser')) {
+                mockDB.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+                updateDashboard();
+                showScreen('dashboard-screen');
+            }
+        }
+
+        // Modified functions to use localStorage
+        function register() {
+            // ... (previous implementation) ...
+            localStorage.setItem('mockDB', JSON.stringify(mockDB));
+            localStorage.setItem('currentUser', JSON.stringify(newUser));
+        }
+
+        function login() {
+            // ... (previous implementation) ...
+            localStorage.setItem('currentUser', JSON.stringify(user));
+        }
+
+        function logout() {
+            localStorage.removeItem('currentUser');
+        }
+
+        // Initialize on load
+        window.onload = initApp;
+    </script>
+</body>
+  </html>
